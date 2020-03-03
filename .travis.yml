@@ -2,7 +2,8 @@ language: shell
 arch:
   - amd64
   - arm64
-  - arm32
+os:
+  - linux
 services:
 - docker
 #stages:
