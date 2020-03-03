@@ -22,15 +22,23 @@ before_install:
 install:
 - |
   if [[ -z "$TRAVIS_TAG" ]]; then # build
-    docker build . -f arm32.Dockerfile -t ${BASE_REPO}:arm32_"$DEV_REPO" && docker push ${BASE_REPO}:arm32_"$DEV_REPO"; # arm32
-    docker build . -f arm64.Dockerfile -t ${BASE_REPO}:arm64_"$DEV_REPO" && docker push ${BASE_REPO}:arm64_"$DEV_REPO"; # arm64
-    docker build . -f Dockerfile -t ${BASE_REPO}:"$DEV_REPO" && docker push ${BASE_REPO}:"$DEV_REPO"; # arm32
+    docker build . -f arm32.Dockerfile -t ${BASE_REPO}:arm32_${DOCKER_TAG} && docker push ${BASE_REPO}:arm32_${DOCKER_TAG}; # arm32
+    docker build . -f arm64.Dockerfile -t ${BASE_REPO}:arm64_${DOCKER_TAG} && docker push ${BASE_REPO}:arm64_${DOCKER_TAG}; # arm64
+    docker build . -f Dockerfile -t ${BASE_REPO}:${DEV_REPO} && docker push ${BASE_REPO}:$DEV_REPO; # arm32
   fi
 - |
   if [[ -n "$TRAVIS_TAG" ]]; then
-  docker pull ${BASE_REPO}:arm32_"$DEV_REPO" && \
-  docker tag ${BASE_REPO}:arm32_"${DEV_REPO}" ${BASE_REPO}:arm32_"${TRAVIS_TAG}" && \
-  docker tag $DEV_REPO $LATEST_REPO && \
-  docker push $RELEASE_REPO && docker push $LATEST_REPO;
+    docker pull ${BASE_REPO}:arm32_${DOCKER_TAG} && \
+    docker tag ${BASE_REPO}:arm32_${DOCKER_TAG} ${BASE_REPO}:arm32_${TRAVIS_TAG} && \
+    docker tag ${BASE_REPO}:arm32_${DOCKER_TAG} ${BASE_REPO}:arm32_latest && \
+    docker push ${BASE_REPO}:arm32_${TRAVIS_TAG} && docker push ${BASE_REPO}:arm32_latest; # arm32
+    docker pull ${BASE_REPO}:arm64_${DOCKER_TAG} && \
+    docker tag ${BASE_REPO}:arm64_${DOCKER_TAG} ${BASE_REPO}:arm64_${TRAVIS_TAG} && \
+    docker tag ${BASE_REPO}:arm64_${DOCKER_TAG} ${BASE_REPO}:arm64_latest && \
+    docker push ${BASE_REPO}:arm64_${TRAVIS_TAG} && docker push ${BASE_REPO}:arm64_latest; # arm64
+    docker pull ${BASE_REPO}:${DOCKER_TAG} && \
+    docker tag ${BASE_REPO}:${DOCKER_TAG} ${BASE_REPO}:${TRAVIS_TAG} && \
+    docker tag ${BASE_REPO}:${DOCKER_TAG} ${BASE_REPO}:latest && \
+    docker push ${BASE_REPO}:${TRAVIS_TAG} && docker push ${BASE_REPO}:latest; # amd64
   fi # release
 
