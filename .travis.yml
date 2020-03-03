@@ -24,7 +24,7 @@ install:
   if [[ -z "$TRAVIS_TAG" ]]; then # build
     docker build . -f arm32.Dockerfile -t ${BASE_REPO}:arm32_${DOCKER_TAG} && docker push ${BASE_REPO}:arm32_${DOCKER_TAG}; # arm32
     docker build . -f arm64.Dockerfile -t ${BASE_REPO}:arm64_${DOCKER_TAG} && docker push ${BASE_REPO}:arm64_${DOCKER_TAG}; # arm64
-    docker build . -f Dockerfile -t ${BASE_REPO}:${DEV_REPO} && docker push ${BASE_REPO}:$DEV_REPO; # arm32
+    docker build . -f Dockerfile -t ${BASE_REPO}:${DOCKER_TAG} && docker push ${BASE_REPO}:${DOCKER_TAG}; # amd64
   fi
 - |
   if [[ -n "$TRAVIS_TAG" ]]; then
