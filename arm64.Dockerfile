@@ -1,4 +1,4 @@
-FROM arm32v6/alpine:edge
+FROM arm64v8/alpine:edge
 
 LABEL AUTHOR=Blademainer<blademainer@gmail.com>
 
