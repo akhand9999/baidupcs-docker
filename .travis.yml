@@ -10,7 +10,7 @@ services:
 
 env:
   global:
-  - BASE_REPO=$DOCKER_USER/hexo-nginx-https
+  - BASE_REPO=$DOCKER_USER/baidupcs
   - DOCKER_TAG=${TRAVIS_COMMIT:0:7}
   - DEV_REPO=${BASE_REPO}:$DOCKER_TAG
   - RELEASE_REPO=${BASE_REPO}:$TRAVIS_TAG
