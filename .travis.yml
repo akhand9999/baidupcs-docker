@@ -20,12 +20,14 @@ before_install:
 - env
 - docker login -u$DOCKER_USER -p$DOCKER_PASS
 install:
-- if [[ -z "$TRAVIS_TAG" ]]; then # build
+- |
+  if [[ -z "$TRAVIS_TAG" ]]; then # build
     docker build . -f arm32.Dockerfile -t ${BASE_REPO}:arm32_"$DEV_REPO" && docker push ${BASE_REPO}:arm32_"$DEV_REPO"; # arm32
     docker build . -f arm64.Dockerfile -t ${BASE_REPO}:arm64_"$DEV_REPO" && docker push ${BASE_REPO}:arm64_"$DEV_REPO"; # arm64
     docker build . -f Dockerfile -t ${BASE_REPO}:"$DEV_REPO" && docker push ${BASE_REPO}:"$DEV_REPO"; # arm32
   fi
-- if [[ -n "$TRAVIS_TAG" ]]; then
+- |
+  if [[ -n "$TRAVIS_TAG" ]]; then
   docker pull ${BASE_REPO}:arm32_"$DEV_REPO" && \
   docker tag ${BASE_REPO}:arm32_"${DEV_REPO}" ${BASE_REPO}:arm32_"${TRAVIS_TAG}" && \
   docker tag $DEV_REPO $LATEST_REPO && \
