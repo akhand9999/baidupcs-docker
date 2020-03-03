@@ -1,6 +1,6 @@
 The Docker image for [BaiduPCS-Web](https://github.com/liuzhuoling2011/baidupcs-web)
 
-![](https://img.shields.io/docker/pulls/wahyd4/baidupcs.svg)
+![](https://img.shields.io/docker/pulls/blademainer/baidupcs.svg)
 
 ## Why
 
@@ -9,7 +9,7 @@ The easiest and simplest way to run this application.
 ## Run
 
 ```bash
-docker run -d -p 5299:5299 -v /data:/root/Downloads wahyd4/baidupcs:latest
+docker run -d -p 5299:5299 -v /data:/root/Downloads blademainer/baidupcs:latest
 ```
 
 Then open <http://localhost:5299> to enjoy!
