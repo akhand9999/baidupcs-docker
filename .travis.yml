@@ -1,7 +1,9 @@
 language: shell
 arch:
   - amd64
-  - arm64
+  - arm64-graviton2
+virt: lxd
+group: edge
 os:
   - linux
 services:
